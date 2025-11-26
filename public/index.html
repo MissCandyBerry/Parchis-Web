@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎲 Parchís Online</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- ============================================ -->
+  <!-- PANTALLA 1: INICIO                           -->
+  <!-- ============================================ -->
+  <div id="screenInicio" class="screen">
+    <div class="dados-fondo"></div>
+    <div class="modal-center">
+      <h1 class="titulo-principal">PARCHÍS<br><span class="online">ONLINE</span></h1>
+      <button id="btnJugar" class="btn-grande">Jugar</button>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PANTALLA 2: REGISTRO                         -->
+  <!-- ============================================ -->
+  <div id="screenRegistro" class="screen hidden">
+    <div class="dados-fondo"></div>
+    <div class="modal-center">
+      <div class="modal-header">REGISTRO</div>
+      <div class="modal-body">
+        <label>Escribe tu nombre</label>
+        <input type="text" id="inputNombre" placeholder="Candy" maxlength="10">
+        <button id="btnAceptarNombre" class="btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PANTALLA 3: CONFIGURACIÓN (COLOR)            -->
+  <!-- ============================================ -->
+  <div id="screenConfiguracion" class="screen hidden">
+    <div class="dados-fondo"></div>
+    <div class="modal-center">
+      <div class="modal-header">CONFIGURACIÓN</div>
+      <div class="modal-body">
+        <label>Escoge un color</label>
+        <div class="color-options">
+          <div class="color-option" data-color="ROJO">
+            <div class="color-circle rojo"></div>
+            <span>Rojo</span>
+          </div>
+          <div class="color-option" data-color="AZUL">
+            <div class="color-circle azul"></div>
+            <span>Azul</span>
+          </div>
+          <div class="color-option" data-color="AMARILLO">
+            <div class="color-circle amarillo"></div>
+            <span>Amarillo</span>
+          </div>
+          <div class="color-option" data-color="VERDE">
+            <div class="color-circle verde"></div>
+            <span>Verde</span>
+          </div>
+        </div>
+        <button id="btnAceptarColor" class="btn-primary" disabled>Aceptar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PANTALLA 4: SALA DE ESPERA (LOBBY)           -->
+  <!-- ============================================ -->
+  <div id="screenLobby" class="screen hidden">
+    <div class="dados-fondo"></div>
+    <div class="modal-center">
+      <div class="modal-header">
+        SALA DE ESPERA 
+        <span id="contadorJugadores">0/4</span>
+      </div>
+      <div class="modal-body">
+        <div id="listaJugadores" class="lista-jugadores">
+          <!-- Se llenará dinámicamente -->
+        </div>
+        <button id="btnIniciar" class="btn-primary">Iniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PANTALLA 5: JUEGO (TABLERO)                  -->
+  <!-- ============================================ -->
+  <div id="screenJuego" class="screen hidden">
+    <div class="game-layout">
+      <!-- JUGADOR ROJO (arriba-izquierda) -->
+      <div class="player-info player-rojo">
+        <div class="player-name" id="nombreRojo">-</div>
+        <div class="player-fichas" id="fichasRojo">0/4</div>
+      </div>
+
+      <!-- JUGADOR AZUL (arriba-derecha) -->
+      <div class="player-info player-azul">
+        <div class="player-name" id="nombreAzul">-</div>
+        <div class="player-fichas" id="fichasAzul">0/4</div>
+      </div>
+
+      <!-- TABLERO CENTRAL -->
+      <div class="tablero-container">
+        <canvas id="tablero" width="1180" height="880"></canvas>
+      </div>
+
+      <!-- DADO (izquierda) -->
+      <div class="dado-container">
+        <div id="dado" class="dado">
+          <div class="cara" data-value="1">⚀</div>
+        </div>
+        <div id="valorDado" class="valor-dado">-</div>
+      </div>
+
+      <!-- LOG DE EVENTOS (derecha) -->
+      <div class="log-container">
+        <div id="logEventos" class="log-eventos">
+          Aquí se va imprimiendo... 
+        </div>
+      </div>
+
+      <!-- JUGADOR VERDE (abajo-izquierda) -->
+      <div class="player-info player-verde">
+        <div class="player-name" id="nombreVerde">-</div>
+        <div class="player-fichas" id="fichasVerde">0/4</div>
+      </div>
+
+      <!-- JUGADOR AMARILLO (abajo-derecha) -->
+      <div class="player-info player-amarillo">
+        <div class="player-name" id="nombreAmarillo">-</div>
+        <div class="player-fichas" id="fichasAmarillo">0/4</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARGAR JAVASCRIPT -->
+  <script src="js/BoardRenderer.js"></script>
+  <script src="js/PieceManager.js"></script>
+  <script src="js/GameStateManager.js"></script>
+  <script src="js/client.js"></script>
+</body>
+</html>
