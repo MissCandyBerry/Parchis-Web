@@ -110,7 +110,7 @@ class GameStateManager {
     // Botón "Aceptar Color" envía registro al broker
     document.getElementById('btnAceptarColor').onclick = () => {
       // Obtener la opción seleccionada
-      const selectedColor = document.querySelector('. color-option.selected');
+      const selectedColor = document.querySelector('.color-option.selected');
       
       // Validación: debe haber un color seleccionado
       if (!selectedColor) {
