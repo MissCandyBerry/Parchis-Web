@@ -9,17 +9,20 @@
 <body>
   <!-- ============================================ -->
   <!-- PANTALLA 1: INICIO                           -->
+  <!-- Pantalla de bienvenida con botón "Jugar"     -->
   <!-- ============================================ -->
   <div id="screenInicio" class="screen">
     <div class="dados-fondo"></div>
     <div class="modal-center">
       <h1 class="titulo-principal">PARCHÍS<br><span class="online">ONLINE</span></h1>
+      <!-- Botón que lleva a la pantalla de registro -->
       <button id="btnJugar" class="btn-grande">Jugar</button>
     </div>
   </div>
 
   <!-- ============================================ -->
   <!-- PANTALLA 2: REGISTRO                         -->
+  <!-- El jugador escribe su nombre                 -->
   <!-- ============================================ -->
   <div id="screenRegistro" class="screen hidden">
     <div class="dados-fondo"></div>
@@ -27,7 +30,9 @@
       <div class="modal-header">REGISTRO</div>
       <div class="modal-body">
         <label>Escribe tu nombre</label>
+        <!-- Input para el nombre del jugador (máximo 10 caracteres) -->
         <input type="text" id="inputNombre" placeholder="Candy" maxlength="10">
+        <!-- Botón que valida el nombre y avanza a configuración -->
         <button id="btnAceptarNombre" class="btn-primary">Aceptar</button>
       </div>
     </div>
@@ -35,6 +40,7 @@
 
   <!-- ============================================ -->
   <!-- PANTALLA 3: CONFIGURACIÓN (COLOR)            -->
+  <!-- El jugador selecciona su color de juego      -->
   <!-- ============================================ -->
   <div id="screenConfiguracion" class="screen hidden">
     <div class="dados-fondo"></div>
@@ -43,6 +49,7 @@
       <div class="modal-body">
         <label>Escoge un color</label>
         <div class="color-options">
+          <!-- Cada opción tiene data-color que se envía al broker -->
           <div class="color-option" data-color="ROJO">
             <div class="color-circle rojo"></div>
             <span>Rojo</span>
@@ -60,6 +67,7 @@
             <span>Verde</span>
           </div>
         </div>
+        <!-- Botón deshabilitado hasta que se seleccione un color -->
         <button id="btnAceptarColor" class="btn-primary" disabled>Aceptar</button>
       </div>
     </div>
@@ -67,18 +75,23 @@
 
   <!-- ============================================ -->
   <!-- PANTALLA 4: SALA DE ESPERA (LOBBY)           -->
+  <!-- Muestra jugadores conectados y permite       -->
+  <!-- iniciar la partida (mínimo 2 jugadores)      -->
   <!-- ============================================ -->
   <div id="screenLobby" class="screen hidden">
     <div class="dados-fondo"></div>
     <div class="modal-center">
       <div class="modal-header">
         SALA DE ESPERA 
+        <!-- Contador de jugadores conectados (0/4) -->
         <span id="contadorJugadores">0/4</span>
       </div>
       <div class="modal-body">
+        <!-- Lista dinámica de jugadores con su color -->
         <div id="listaJugadores" class="lista-jugadores">
-          <!-- Se llenará dinámicamente -->
+          <!-- Se llena dinámicamente desde GameStateManager. js -->
         </div>
+        <!-- Botón para solicitar inicio de partida al broker -->
         <button id="btnIniciar" class="btn-primary">Iniciar</button>
       </div>
     </div>
@@ -86,12 +99,17 @@
 
   <!-- ============================================ -->
   <!-- PANTALLA 5: JUEGO (TABLERO)                  -->
+  <!-- Pantalla principal donde ocurre el juego     -->
+  <!-- Layout en grid: 4 esquinas (jugadores),      -->
+  <!-- centro (tablero), izquierda (dado),          -->
+  <!-- derecha (log de eventos)                     -->
   <!-- ============================================ -->
   <div id="screenJuego" class="screen hidden">
     <div class="game-layout">
       <!-- JUGADOR ROJO (arriba-izquierda) -->
       <div class="player-info player-rojo">
         <div class="player-name" id="nombreRojo">-</div>
+        <!-- Muestra fichas en meta (0/4) -->
         <div class="player-fichas" id="fichasRojo">0/4</div>
       </div>
 
@@ -102,22 +120,27 @@
       </div>
 
       <!-- TABLERO CENTRAL -->
+      <!-- Canvas donde BoardRenderer dibuja el tablero y PieceManager las fichas -->
       <div class="tablero-container">
         <canvas id="tablero" width="1180" height="880"></canvas>
       </div>
 
       <!-- DADO (izquierda) -->
+      <!-- Muestra el valor del último dado lanzado -->
       <div class="dado-container">
         <div id="dado" class="dado">
+          <!-- Cara del dado con símbolos Unicode (⚀ = 1, ⚅ = 6) -->
           <div class="cara" data-value="1">⚀</div>
         </div>
+        <!-- Texto del valor del dado -->
         <div id="valorDado" class="valor-dado">-</div>
       </div>
 
       <!-- LOG DE EVENTOS (derecha) -->
+      <!-- Muestra mensajes en tiempo real de lo que ocurre en la partida -->
       <div class="log-container">
         <div id="logEventos" class="log-eventos">
-          Aquí se va imprimiendo... 
+          Aquí se va imprimiendo...  
         </div>
       </div>
 
@@ -135,7 +158,15 @@
     </div>
   </div>
 
-  <!-- CARGAR JAVASCRIPT -->
+  <!-- ============================================ -->
+  <!-- CARGAR JAVASCRIPT (orden importante)         -->
+  <!-- 1. WebSocketClient: Maneja conexión          -->
+  <!-- 2. BoardRenderer: Dibuja tablero             -->
+  <!-- 3. PieceManager: Gestiona fichas             -->
+  <!-- 4. GameStateManager: Controla pantallas      -->
+  <!-- 5.  client. js: Orquesta todo                  -->
+  <!-- ============================================ -->
+  <script src="js/WebSocketClient.js"></script>
   <script src="js/BoardRenderer.js"></script>
   <script src="js/PieceManager.js"></script>
   <script src="js/GameStateManager.js"></script>

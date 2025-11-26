@@ -1,19 +1,21 @@
 /* ========================================= */
 /*           VARIABLES GLOBALES              */
+/* Colores reutilizables en toda la app     */
 /* ========================================= */
 :root {
-  --color-fondo: #2c3e45;
-  --color-modal: #1a2b31;
-  --color-texto: #ffffff;
-  --color-rojo: #c65d4f;
-  --color-azul: #7ca8d1;
-  --color-verde: #7fa782;
-  --color-amarillo: #d9a95b;
-  --color-madera: #b89968;
+  --color-fondo: #2c3e45;          /* Fondo oscuro principal */
+  --color-modal: #1a2b31;          /* Fondo de modales */
+  --color-texto: #ffffff;          /* Texto blanco */
+  --color-rojo: #c65d4f;           /* Ficha roja */
+  --color-azul: #7ca8d1;           /* Ficha azul */
+  --color-verde: #7fa782;          /* Ficha verde */
+  --color-amarillo: #d9a95b;       /* Ficha amarilla */
+  --color-madera: #b89968;         /* Fondo del tablero */
 }
 
 /* ========================================= */
 /*           ESTILOS GENERALES               */
+/* Reseteo básico y configuración de body   */
 /* ========================================= */
 * {
   margin: 0;
@@ -23,9 +25,14 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
+  overflow: hidden; /* Evita scroll en pantallas completas */
 }
 
+/* ========================================= */
+/*         SISTEMA DE PANTALLAS              */
+/* Cada pantalla ocupa 100% del viewport    */
+/* . hidden oculta la pantalla completamente */
+/* ========================================= */
 .screen {
   width: 100vw;
   height: 100vh;
@@ -41,6 +48,8 @@ body {
 
 /* ========================================= */
 /*         FONDOS Y DADOS FLOTANTES          */
+/* Animación de dados en el fondo de        */
+/* pantallas de inicio/registro/lobby        */
 /* ========================================= */
 .dados-fondo {
   position: absolute;
@@ -49,15 +58,16 @@ body {
   width: 100%;
   height: 100%;
   background: var(--color-fondo);
-  z-index: -1;
+  z-index: -1; /* Detrás de todo el contenido */
 }
 
+/* Dados decorativos flotantes (::before y ::after) */
 .dados-fondo::before,
 .dados-fondo::after {
-  content: '⚅';
+  content: '⚅'; /* Símbolo Unicode del dado 6 */
   position: absolute;
   font-size: 80px;
-  color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.1); /* Semitransparente */
   animation: float 6s ease-in-out infinite;
 }
 
@@ -68,12 +78,13 @@ body {
 }
 
 .dados-fondo::after {
-  content: '⚃';
+  content: '⚃'; /* Dado 4 */
   bottom: 15%;
   right: 20%;
-  animation-delay: 3s;
+  animation-delay: 3s; /* Animación desfasada */
 }
 
+/* Animación de flotación (sube/baja + rota) */
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(10deg); }
@@ -81,12 +92,13 @@ body {
 
 /* ========================================= */
 /*           PANTALLAS: MODALES              */
+/* Cajas centradas para registro/config     */
 /* ========================================= */
 .modal-center {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Centrado perfecto */
   background: var(--color-modal);
   padding: 40px;
   border-radius: 20px;
@@ -95,6 +107,7 @@ body {
   text-align: center;
 }
 
+/* Cabecera del modal (título) */
 .modal-header {
   background: rgba(255, 255, 255, 0.1);
   color: var(--color-texto);
@@ -103,9 +116,10 @@ body {
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
-  letter-spacing: 2px;
+  letter-spacing: 2px; /* Espaciado de letras */
 }
 
+/* Cuerpo del modal (contenido) */
 .modal-body {
   color: var(--color-texto);
 }
@@ -117,6 +131,7 @@ body {
   color: #ddd;
 }
 
+/* Inputs y selects con fondo oscuro */
 .modal-body input,
 .modal-body select {
   width: 100%;
@@ -128,6 +143,7 @@ body {
   font-size: 16px;
 }
 
+/* Efecto focus (al hacer click) */
 .modal-body input:focus,
 .modal-body select:focus {
   outline: none;
@@ -136,6 +152,7 @@ body {
 
 /* ========================================= */
 /*         PANTALLA DE INICIO                */
+/* Título grande con "PARCHÍS ONLINE"       */
 /* ========================================= */
 .titulo-principal {
   font-size: 64px;
@@ -145,6 +162,7 @@ body {
   letter-spacing: 4px;
 }
 
+/* Texto "ONLINE" con borde */
 .online {
   display: block;
   font-size: 48px;
@@ -156,14 +174,16 @@ body {
 
 /* ========================================= */
 /*         PANTALLA DE CONFIGURACIÓN         */
+/* Selección de color en grid 2x2           */
 /* ========================================= */
 .color-options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; /* 2 columnas */
   gap: 15px;
   margin: 20px 0;
 }
 
+/* Cada opción de color (clickeable) */
 .color-option {
   display: flex;
   align-items: center;
@@ -171,18 +191,20 @@ body {
   border: 2px solid transparent;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0. 3s;
 }
 
 .color-option:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 
+/* Estado seleccionado (borde blanco) */
 .color-option.selected {
   border-color: var(--color-texto);
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* Círculo de color (40x40px) */
 .color-circle {
   width: 40px;
   height: 40px;
@@ -191,6 +213,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0. 3);
 }
 
+/* Colores específicos de las fichas */
 .color-circle.rojo { background: var(--color-rojo); }
 .color-circle.azul { background: var(--color-azul); }
 .color-circle.verde { background: var(--color-verde); }
@@ -198,12 +221,14 @@ body {
 
 /* ========================================= */
 /*         PANTALLA DE LOBBY                 */
+/* Lista vertical de jugadores conectados   */
 /* ========================================= */
 .lista-jugadores {
   margin: 20px 0;
   text-align: left;
 }
 
+/* Cada jugador en el lobby */
 .jugador-item {
   display: flex;
   align-items: center;
@@ -221,6 +246,7 @@ body {
 
 /* ========================================= */
 /*           BOTONES                         */
+/* Estilo uniforme para todos los botones   */
 /* ========================================= */
 button {
   background: rgba(255, 255, 255, 0.2);
@@ -237,17 +263,20 @@ button {
   letter-spacing: 1px;
 }
 
+/* Efecto hover (al pasar el mouse) */
 button:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* Sube 2px */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
+/* Botón deshabilitado (opaco) */
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
+/* Botón grande (pantalla inicio) */
 .btn-grande {
   font-size: 24px;
   padding: 20px 60px;
@@ -259,16 +288,19 @@ button:disabled {
 
 /* ========================================= */
 /*     PANTALLA DE JUEGO (LAYOUT GRID)      */
+/* Grid 3x3 con tablero en el centro        */
+/* 4 esquinas para info de jugadores        */
 /* ========================================= */
 .game-layout {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 200px 1fr 250px;
-  grid-template-rows: 150px 1fr 150px;
+  grid-template-columns: 200px 1fr 250px; /* Izq | Centro | Der */
+  grid-template-rows: 150px 1fr 150px;    /* Arr | Centro | Abajo */
   gap: 10px;
   padding: 10px;
   background: var(--color-madera);
+  /* Textura de cuadrícula (opcional) */
   background-image: 
     linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px),
     linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
@@ -277,6 +309,7 @@ button:disabled {
 
 /* ========================================= */
 /*     INFORMACIÓN DE JUGADORES              */
+/* Cajas en las 4 esquinas del grid         */
 /* ========================================= */
 .player-info {
   background: rgba(0, 0, 0, 0.3);
@@ -292,45 +325,49 @@ button:disabled {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Nombre del jugador */
 .player-name {
   font-size: 28px;
   margin-bottom: 10px;
 }
 
+/* Fichas en meta (ej: "2/4") */
 .player-fichas {
   font-size: 36px;
 }
 
+/* Posiciones específicas en el grid */
 .player-rojo {
   grid-column: 1;
   grid-row: 1;
-  background: rgba(198, 93, 79, 0.3);
+  background: rgba(198, 93, 79, 0.3); /* Tinte rojo */
 }
 
 .player-azul {
   grid-column: 3;
   grid-row: 1;
-  background: rgba(124, 168, 209, 0.3);
+  background: rgba(124, 168, 209, 0.3); /* Tinte azul */
 }
 
 .player-verde {
   grid-column: 1;
   grid-row: 3;
-  background: rgba(127, 167, 130, 0.3);
+  background: rgba(127, 167, 130, 0.3); /* Tinte verde */
 }
 
 .player-amarillo {
   grid-column: 3;
   grid-row: 3;
-  background: rgba(217, 169, 91, 0.3);
+  background: rgba(217, 169, 91, 0.3); /* Tinte amarillo */
 }
 
 /* ========================================= */
 /*           TABLERO CENTRAL                 */
+/* Canvas donde se dibuja el juego          */
 /* ========================================= */
 .tablero-container {
   grid-column: 2;
-  grid-row: 1 / 4;
+  grid-row: 1 / 4; /* Ocupa las 3 filas (centro vertical completo) */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -344,11 +381,12 @@ button:disabled {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   background: var(--color-madera);
-  cursor: pointer;
+  cursor: pointer; /* Indica que es clickeable */
 }
 
 /* ========================================= */
 /*           DADO (IZQUIERDA)                */
+/* Cubo blanco con valor del dado           */
 /* ========================================= */
 .dado-container {
   grid-column: 1;
@@ -362,6 +400,7 @@ button:disabled {
   padding: 20px;
 }
 
+/* Cubo del dado (100x100px) */
 .dado {
   width: 100px;
   height: 100px;
@@ -373,9 +412,10 @@ button:disabled {
   font-size: 64px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   margin-bottom: 15px;
-  user-select: none;
+  user-select: none; /* No se puede seleccionar el texto */
 }
 
+/* Texto "Dado: 5" */
 .valor-dado {
   font-size: 24px;
   color: var(--color-texto);
@@ -384,6 +424,7 @@ button:disabled {
 
 /* ========================================= */
 /*        LOG DE EVENTOS (DERECHA)           */
+/* Terminal estilo consola con mensajes     */
 /* ========================================= */
 .log-container {
   grid-column: 3;
@@ -394,16 +435,18 @@ button:disabled {
   overflow: hidden;
 }
 
+/* Área de scroll con mensajes */
 .log-eventos {
   width: 100%;
   height: 100%;
-  overflow-y: auto;
-  color: #0f0;
+  overflow-y: auto; /* Scroll vertical */
+  color: #0f0; /* Verde terminal */
   font-family: 'Courier New', monospace;
   font-size: 13px;
   line-height: 1.6;
 }
 
+/* Scrollbar personalizado (webkit) */
 .log-eventos::-webkit-scrollbar {
   width: 8px;
 }
@@ -413,18 +456,21 @@ button:disabled {
   border-radius: 4px;
 }
 
+/* Cada entrada del log */
 .log-entry {
   margin: 5px 0;
   padding: 5px;
   border-radius: 3px;
 }
 
+/* Mensaje de turno (amarillo) */
 .log-turno {
   color: #ffd93d;
   font-weight: bold;
   background: rgba(255, 217, 61, 0.1);
 }
 
+/* Mensaje de error (rojo) */
 .log-error {
   color: #f66;
   font-weight: bold;
@@ -432,10 +478,11 @@ button:disabled {
 
 /* ========================================= */
 /*              RESPONSIVE                   */
+/* Ajustes para pantallas pequeñas          */
 /* ========================================= */
 @media (max-width: 1200px) {
   .game-layout {
-    grid-template-columns: 150px 1fr 200px;
+    grid-template-columns: 150px 1fr 200px; /* Columnas más angostas */
   }
   
   .player-name {
